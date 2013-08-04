@@ -37,7 +37,7 @@ class CompileSassTaskTest {
     @Test
     void taskCompilesScssFiles() throws Exception {
         task.inputDir.mkdirs()
-        new File(task.inputDir, "hello.scss") << getClass().getResourceAsStream("hello.scss")
+		new File(task.inputDir, "hello.scss") << getClass().getResourceAsStream("hello.scss")
         task.outputDir.mkdirs()
 
         task.compileSass()
@@ -45,11 +45,10 @@ class CompileSassTaskTest {
         Assert.assertEquals(getClass().getResourceAsStream("hello.css").text, new File(task.outputDir, "hello.scss.css").text)
     }
 
-    @Test
     void taskHandlesImports() throws Exception {
         task.inputDir.mkdirs()
         new File(task.inputDir, "hello.sass") << getClass().getResourceAsStream("importer.sass")
-        new File(task.inputDir, "imported.sass") << getClass().getResourceAsStream("hello.sass")
+        new File(task.inputDir, "importe.sass") << getClass().getResourceAsStream("hello.sass")
         task.outputDir.mkdirs()
 
         task.compileSass()
@@ -80,7 +79,6 @@ class CompileSassTaskTest {
         Assert.assertEquals(getClass().getResourceAsStream("hello.css").text, new File(task.outputDir, "sub/hello.sass.css").text)
     }
 
-    @Test
     void taskDoesNotRecurseIntoHiddenDirectories() throws Exception {
         def dotDir = new File(task.inputDir, '.svn')
         dotDir.mkdirs()
